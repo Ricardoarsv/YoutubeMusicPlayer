@@ -8,6 +8,7 @@ const youtubeLinkInput = document.getElementById('youtubeLink');
         let isPlaying = false;
         let player; // Variable para almacenar el objeto del reproductor de YouTube
         const thumbnailImage = document.getElementById('thumbnailImage');
+        const videoTitleElement = document.getElementById('videoTitle');
         const videoControls = document.getElementById('videoControls');
         const downloadButton = document.getElementById('downloadButton');
 
@@ -100,8 +101,13 @@ const youtubeLinkInput = document.getElementById('youtubeLink');
         function onPlayerReady(event) {
             const thumbnailUrl = `https://img.youtube.com/vi/${player.getVideoData().video_id}/maxresdefault.jpg`;
             thumbnailImage.src = thumbnailUrl;
+        
+            const videoTitle = player.getVideoData().title;
+            videoTitleElement.innerText = videoTitle;
+        
             playAudio(); // Inicia la reproducción después de que el reproductor esté listo
         }
+        
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.PAUSED) {
