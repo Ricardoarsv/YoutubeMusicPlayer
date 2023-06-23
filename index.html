@@ -1,20 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" class="m-[30vh] bg-white-900">
+<html lang="en" class="m-[4%] bg-white-900">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YTMusicPlayer</title>
+    <link rel="shorcut icon" href="./assets/images/YTMusicLogo.png">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.5/dist/full.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/assets/css/Fonts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./assets/style.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        
+        .slide-down {
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease-out, transform 0.10s ease-out;
+        }
+
+        .slide-down.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .custom-slider::-webkit-slider-runnable-track {
+            background-color: #5c0606; 
+        }
+
+        .custom-slider::-webkit-slider-thumb {
+            background-color: hsl(var(--b1) / var(--tw-bg-opacity));
+        }
+
+    </style>
 </head>
-<body class="flex flex-col justify-center items-center">
-    <h1 class="text-center text-[3vh] font-serif text-white w-md">Youtube Music Player</h1>
-    <div id="MusicUI" class="h-full w-[20em] flex flex-col justify-center items-center gap-2 p-8 rounded-lg bg-red-900">
-        <input type="text" placeholder="https://www.youtube.com/watch?v=" class="input input-bordered input-error w-full max-w-xs text-white text-center" /> <button><img src="./assets/icons/YTlogo.png" width="100vh"></button>
-        <div id="VideoPreview"></div>
-        <input type="range" min="0" max="100" value="40" class="range range-error max-w-xs w-xs "/>
+<body>
+    <div class="flex flex-col justify-center items-center h-full">
+        <h1 id="Tittle" class="text-2xl text-white font-serif">Youtube Music Player</h1>
+        <div id="MusicUI" class="w-[45vh] md:w-[60%] gap-2 p-8 rounded-lg bg-red-900 flex flex-col justify-center items-center">
+            <div class="join">
+                <input type="text" id="youtubeLink" placeholder="https://www.youtube.com/watch?v=" class="input input-bordered join-item text-white text-center w-full md:w-[28em]"/>
+                <button id="playButton" class="btn join-item rounded-r-full"><img src="./assets/images/YTlogo.png" width="50em"></button>
+            </div>
+            <div class="flex flex-col items-center gap-2 slide-down hidden" id="videoControls">
+
+                <img id="thumbnailImage" src="/assets/images/placeholder.jpg" alt="Video Thumbnail" class="mb-4 w-[200px] h-[120px] md:w-[320px] md:h-[180px]">
+
+                <div id="progressContainer" class="w-full">
+                    <input type="range" id="seekSlider" min="0" max="100" value="0" class="range range-xs range-error base-100 w-full custom-slider" />
+                </div>
+
+                <div id="timeContainer" class="flex justify-between w-full">
+                    <span id="currentTime" class="text-sm text-white">00:00</span>
+                    <span id="remainingTime" class="text-sm text-white">00:00</span>
+                </div>
+
+                <div class="w-full flex items-center gap-4 mb-4">
+                    <i id="volumeIcon" class="fas fa-volume-up text-white"></i> 
+                    <input type="range" id="volumeSlider" min="0" max="100" value="50" class="range range-xs range-error custom-slider"/> 
+                </div>
+
+                <div class="flex items-center gap-4">
+                <button id="playPauseButton" class="btn rounded-full mb-4 px-8 py-4">Pause</button>
+                <button id="downloadButton" class="btn join-item rounded-full mb-4 px-8 py-4"">Descargar MP3</button>
+                </div>
+
+            </div>
+        </div>
     </div>
+    
+    <div id="player" style="width: 0; height: 0; visibility: hidden;"></div>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="./assets/js/scripts.js"></script>
 </body>
 </html>
