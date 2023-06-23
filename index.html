@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" class="m-[30vh] bg-white-900">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YTMusicPlayer</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.5/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body class="flex flex-col justify-center items-center">
+    <h1 class="text-center text-[3vh] font-serif text-white w-md">Youtube Music Player</h1>
+    <div id="MusicUI" class="h-full w-[20em] flex flex-col justify-center items-center gap-2 p-8 rounded-lg bg-red-900">
+        <input type="text" placeholder="https://www.youtube.com/watch?v=" class="input input-bordered input-error w-full max-w-xs text-white text-center" /> <button><img src="./assets/icons/YTlogo.png" width="100vh"></button>
+        <div id="VideoPreview"></div>
+        <input type="range" min="0" max="100" value="40" class="range range-error max-w-xs w-xs "/>
+    </div>
+</body>
+</html>
