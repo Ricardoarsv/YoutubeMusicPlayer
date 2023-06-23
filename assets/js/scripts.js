@@ -1,4 +1,4 @@
-const youtubeLinkInput = document.getElementById('youtubeLink');
+        const youtubeLinkInput = document.getElementById('youtubeLink');
         const playButton = document.getElementById('playButton');
         const playPauseButton = document.getElementById('playPauseButton');
         const volumeSlider = document.getElementById('volumeSlider');
@@ -73,10 +73,23 @@ const youtubeLinkInput = document.getElementById('youtubeLink');
 
 
         function extractVideoId(url) {
-            const regex = /[?&]v=([^&#]+)/;
-            const match = url.match(regex);
-            return match ? match[1] : null;
-        }
+            let videoId = '';
+          
+            // Verificar si es un enlace directo al video en el formato "youtu.be/KW1cin6A09s"
+            if (url.includes('youtu.be/')) {
+              const startIndex = url.indexOf('.be/') + 4;
+              const endIndex = url.length;
+              videoId = url.substring(startIndex, endIndex);
+            }
+            // Verificar si es un enlace de la página del video en el formato "youtube.com/watch?v=KW1cin6A09s"
+            else if (url.includes('youtube.com/watch?v=')) {
+              const startIndex = url.indexOf('?v=') + 3;
+              const endIndex = url.length;
+              videoId = url.substring(startIndex, endIndex);
+            }
+          
+            return videoId;
+          }
 
         function initializePlayer(videoId) {
             if (player) {
